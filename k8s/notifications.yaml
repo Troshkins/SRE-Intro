@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notifications
-          image: quickticket-notifications:v1
+          image: ghcr.io/troshkins/quickticket-notifications:2ab7f1fbd7bc39a026dbd3db56d08bf2adc40333
           imagePullPolicy: Never
           ports:
             - containerPort: 8083

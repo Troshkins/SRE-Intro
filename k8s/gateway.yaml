@@ -41,7 +41,7 @@ spec:
       terminationGracePeriodSeconds: 40
       containers:
         - name: gateway
-          image: quickticket-gateway:v4
+          image: ghcr.io/troshkins/quickticket-gateway:2ab7f1fbd7bc39a026dbd3db56d08bf2adc40333
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
