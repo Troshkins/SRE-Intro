@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/lab12]
 
 jobs:
   build:
@@ -39,12 +39,18 @@ jobs:
           docker build -t ghcr.io/troshkins/quickticket-payments:${{ github.sha }} ./app/payments
           docker push ghcr.io/troshkins/quickticket-payments:${{ github.sha }}
 
+      - name: Build and push notifications image
+        run: |
+          docker build -t ghcr.io/troshkins/quickticket-notifications:${{ github.sha }} ./app/notifications
+          docker push ghcr.io/troshkins/quickticket-notifications:${{ github.sha }}
+
       - name: Update image tags in manifests
         run: |
           SHA=${{ github.sha }}
-          sed -i "s|image: ghcr.io/.*/quickticket-gateway:.*|image: ghcr.io/troshkins/quickticket-gateway:${SHA}|" k8s/gateway.yaml
-          sed -i "s|image: ghcr.io/.*/quickticket-events:.*|image: ghcr.io/troshkins/quickticket-events:${SHA}|" k8s/events.yaml
-          sed -i "s|image: ghcr.io/.*/quickticket-payments:.*|image: ghcr.io/troshkins/quickticket-payments:${SHA}|" k8s/payments.yaml
+          sed -i "s|image: .*quickticket-gateway:.*|image: ghcr.io/troshkins/quickticket-gateway:${SHA}|" k8s/gateway.yaml
+          sed -i "s|image: .*quickticket-events:.*|image: ghcr.io/troshkins/quickticket-events:${SHA}|" k8s/events.yaml
+          sed -i "s|image: .*quickticket-payments:.*|image: ghcr.io/troshkins/quickticket-payments:${SHA}|" k8s/payments.yaml
+          sed -i "s|image: .*quickticket-notifications:.*|image: ghcr.io/troshkins/quickticket-notifications:${SHA}|" k8s/notifications.yaml
 
       - name: Commit and push manifest update
         run: |
