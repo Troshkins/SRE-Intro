@@ -20,7 +20,7 @@ spec:
         - name: ghcr-secret
       containers:
         - name: notifications
-          image: ghcr.io/troshkins/quickticket-notifications:2ab7f1fbd7bc39a026dbd3db56d08bf2adc40333
+          image: ghcr.io/troshkins/quickticket-notifications:91cc7f5848eddfe1b085e9c1d109b0cfb8b66106
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083
