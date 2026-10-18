@@ -14,10 +14,14 @@ spec:
       labels:
         app: notifications
     spec:
+        imagePullSecrets:
+        - name: ghcr-secret
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: notifications
           image: ghcr.io/troshkins/quickticket-notifications:2ab7f1fbd7bc39a026dbd3db56d08bf2adc40333
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8083
           env:
